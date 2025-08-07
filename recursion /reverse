@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+// Global variable to store the reversed number
+int reversed = 0;
+
+void reverseNumber(int num) {
+    if(num == 0)
+        return;
+
+    int digit = num % 10;
+    reversed = reversed * 10 + digit;
+
+    reverseNumber(num / 10);
+}
+
+int main() {
+    int num;
+
+    // Input
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    // Call the recursive function
+    reverseNumber(num);
+
+    printf("Reversed number is: %d\n", reversed);
+
+    return 0;
+}
