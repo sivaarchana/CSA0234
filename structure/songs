@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <string.h>
+
+// Define structure for a song
+struct Song {
+    char title[50];
+    char artist[50];
+    int duration;  // duration in seconds
+};
+
+int main() {
+    struct Song s1;
+
+    // Input song details
+    printf("Enter song title: ");
+    fgets(s1.title, sizeof(s1.title), stdin);
+    // Remove trailing newline
+    s1.title[strcspn(s1.title, "\n")] = '\0';
+
+    printf("Enter artist name: ");
+    fgets(s1.artist, sizeof(s1.artist), stdin);
+    s1.artist[strcspn(s1.artist, "\n")] = '\0';
+
+    printf("Enter duration (in seconds): ");
+    scanf("%d", &s1.duration);
+
+    // Display song details
+    printf("\n--- Song Details ---\n");
+    printf("Title   : %s\n", s1.title);
+    printf("Artist  : %s\n", s1.artist);
+    printf("Duration: %d seconds\n", s1.duration);
+
+    return 0;
+}
