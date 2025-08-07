@@ -1,0 +1,60 @@
+#include <stdio.h>
+
+int main() {
+    FILE *inputFile, *outputFile;
+    char filename_in[100], filename_out[100];
+    float num1, num2, result;
+    char operator;
+
+    printf("Enter input filename: ");
+    scanf("%s", filename_in);
+
+    printf("Enter output filename: ");
+    scanf("%s", filename_out);
+
+    // Open input file for reading
+    inputFile = fopen(filename_in, "r");
+    if (inputFile == NULL) {
+        printf("Unable to open input file %s\n", filename_in);
+        return 1;
+    }
+
+    // Read two numbers and operator from file
+    if (fscanf(inputFile, "%f %c %f", &num1, &operator, &num2) != 3) {
+        printf("Invalid data format in input file\n");
+        fclose(inputFile);
+        return 1;
+    }
+    fclose(inputFile);
+
+    // Perform calculation based on operator
+    switch (operator) {
+        case '+': result = num1 + num2; break;
+        case '-': result = num1 - num2; break;
+        case '*': result = num1 * num2; break;
+        case '/':
+            if (num2 == 0) {
+                printf("Error: Division by zero\n");
+                return 1;
+            }
+            result = num1 / num2;
+            break;
+        default:
+            printf("Unsupported operator '%c'\n", operator);
+            return 1;
+    }
+
+    // Open output file for writing result
+    outputFile = fopen(filename_out, "w");
+    if (outputFile == NULL) {
+        printf("Unable to open output file %s\n", filename_out);
+        return 1;
+    }
+
+    fprintf(outputFile, "Result: %.2f %c %.2f = %.2f\n", num1, operator, num2, result);
+    fclose(outputFile);
+
+    printf("Calculation done. Check output in file %s\n", filename_out);
+
+    return 0;
+}
