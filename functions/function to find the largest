@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+// Function to find the largest number
+int findLargest(int arr[], int n) {
+    int i, max = arr[0];
+    for(i = 1; i < n; i++) {
+        if(arr[i] > max) {
+            max = arr[i];
+        }
+    }
+    return max;
+}
+
+int main() {
+    int arr[100], n, i;
+
+    // Input size of array
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    // Input elements
+    printf("Enter %d elements:\n", n);
+    for(i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    // Call function and display result
+    int max = findLargest(arr, n);
+    printf("The largest element is: %d\n", max);
+
+    return 0;
+}
