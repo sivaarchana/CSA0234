@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    char filename[100];
+    char oldChar, newChar;
+    FILE *file, *tempFile;
+    char ch;
+
+    printf("Enter filename: ");
+    scanf("%s", filename);
+
+    printf("Enter character to replace: ");
+    scanf(" %c", &oldChar);  // Note the space before %c to consume leftover newline
+
+    printf("Enter new character: ");
+    scanf(" %c", &newChar);
+
+    file = fopen(filename, "r");
+    if (file == NULL) {
+        printf("Could not open file %s\n", filename);
+        return 1;
+    }
+
+    tempFile = fopen("temp.txt", "w");
+    if (tempFile == NULL) {
+        printf("Could not create temporary file\n");
+        fclose(file);
+        return 1;
+    }
+
+    // Read from original file and write to temp file with replacements
+    while ((ch = fgetc(file)) != EOF) {
+        if (ch == oldChar) {
+            fputc(newChar, tempFile);
+        } else {
+            fputc(ch, tempFile);
+        }
+    }
+
+    fclose(file);
+    fclose(tempFile);
+
+    // Remove original file
+    if (remove(filename) != 0) {
+        perror("Error deleting original file");
+        return 1;
+    }
+
+    // Rename temp file to original filename
+    if (rename("temp.txt", filename) != 0) {
+        perror("Error renaming temp file");
+        return 1;
+    }
+
+    printf("All occurrences of '%c' replaced with '%c' in file %s.\n", oldChar, newChar, filename);
+
+    return 0;
+}
