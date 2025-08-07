@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <string.h>
+
+// Define structure for car
+struct Car {
+    char brand[20];
+    char model[20];
+    int year;
+    float price;
+};
+
+int main() {
+    struct Car c1;
+
+    // Input car details
+    printf("Enter brand: ");
+    scanf("%s", c1.brand);
+
+    printf("Enter model: ");
+    scanf("%s", c1.model);
+
+    printf("Enter year: ");
+    scanf("%d", &c1.year);
+
+    printf("Enter price: ");
+    scanf("%f", &c1.price);
+
+    // Display car details
+    printf("\n--- Car Details ---\n");
+    printf("Brand: %s\n", c1.brand);
+    printf("Model: %s\n", c1.model);
+    printf("Year : %d\n", c1.year);
+    printf("Price: ₹%.2f\n", c1.price);
+
+    return 0;
+}
