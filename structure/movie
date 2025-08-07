@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <string.h>
+
+// Define structure for Movie
+struct Movie {
+    char title[50];
+    char director[50];
+    int year;
+    float rating;  // IMDb rating or similar
+};
+
+int main() {
+    struct Movie m1;
+
+    // Input movie details
+    printf("Enter movie title: ");
+    fgets(m1.title, sizeof(m1.title), stdin);
+    m1.title[strcspn(m1.title, "\n")] = '\0';  // Remove trailing newline
+
+    printf("Enter director name: ");
+    fgets(m1.director, sizeof(m1.director), stdin);
+    m1.director[strcspn(m1.director, "\n")] = '\0';
+
+    printf("Enter release year: ");
+    scanf("%d", &m1.year);
+
+    printf("Enter rating (out of 10): ");
+    scanf("%f", &m1.rating);
+
+    // Display movie details
+    printf("\n--- Movie Details ---\n");
+    printf("Title    : %s\n", m1.title);
+    printf("Director : %s\n", m1.director);
+    printf("Year     : %d\n", m1.year);
+    printf("Rating   : %.1f / 10\n", m1.rating);
+
+    return 0;
+}
