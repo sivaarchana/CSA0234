@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <ctype.h>
+
+int main() {
+    char str[100];
+    int i, vowels = 0, consonants = 0, digits = 0, spaces = 0, others = 0;
+
+    printf("Enter a string: ");
+    gets(str);  // Or use fgets(str, 100, stdin);
+
+    for (i = 0; str[i] != '\0'; i++) {
+        if (isalpha(str[i])) {
+            char ch = tolower(str[i]);
+            if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u')
+                vowels++;
+            else
+                consonants++;
+        } else if (isdigit(str[i])) {
+            digits++;
+        } else if (str[i] == ' ') {
+            spaces++;
+        } else {
+            others++;
+        }
+    }
+
+    printf("\nVowels: %d", vowels);
+    printf("\nConsonants: %d", consonants);
+    printf("\nDigits: %d", digits);
+    printf("\nSpaces: %d", spaces);
+    printf("\nOther characters: %d\n", others);
+
+    return 0;
+}
