@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    FILE *file;
+    char filename[100];
+    char ch;
+
+    printf("Enter filename to read: ");
+    scanf("%s", filename);
+
+    // Open file in read mode
+    file = fopen(filename, "r");
+
+    if (file == NULL) {
+        printf("Could not open file %s\n", filename);
+        return 1;
+    }
+
+    printf("\nContents of %s:\n", filename);
+
+    // Read character by character until end of file
+    while ((ch = fgetc(file)) != EOF) {
+        putchar(ch);
+    }
+
+    fclose(file);
+
+    return 0;
+}
